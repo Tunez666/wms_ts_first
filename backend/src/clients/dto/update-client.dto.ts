@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsEmail,
   IsNotEmpty,
   IsOptional,
@@ -28,4 +29,8 @@ export class UpdateClientDto {
   @IsString()
   @MaxLength(50)
   phone?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean;
 }

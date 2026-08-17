@@ -4,6 +4,7 @@ import Layout from '../components/layout/Layout';
 import DashboardPage from '../pages/DashboardPage';
 import LoginPage from '../pages/LoginPage';
 import ClientsPage from '../pages/ClientsPage';
+import UsersPage from '../pages/UsersPage';
 
 function ProtectedRoute({
   children,
@@ -37,6 +38,8 @@ export default function AppRouter() {
       >
         <Route index element={<DashboardPage />} />
         <Route path="clients" element={<ClientsPage />} />
+        <Route path="users" element={<UsersPage />} />
+        
       </Route>
     </Routes>
   );

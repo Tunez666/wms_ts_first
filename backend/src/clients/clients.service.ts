@@ -7,15 +7,12 @@ export class ClientsService {
   constructor(private readonly prisma: PrismaService) { }
 
   async findAll() {
-    return this.prisma.client.findMany({
-      where: {
-        isActive: true,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
-  }
+  return this.prisma.client.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+}
 
   async findOne(id: string) {
     return this.prisma.client.findUnique({

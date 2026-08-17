@@ -16,6 +16,10 @@ export default function Sidebar() {
           Клиенты
         </NavLink>
 
+        <NavLink to="/users">
+          Пользователи
+        </NavLink>
+
         <NavLink to="/warehouses">
           Склады
         </NavLink>

@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 
@@ -14,7 +15,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-  ) {}
+  ) { }
 
   @Post('login')
   async login(@Body() dto: LoginDto) {
@@ -32,9 +33,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('me')
-  getMe() {
-    return {
-      message: 'JWT works',
-    };
+  getMe(@Request() req: any) {
+    return req.user;
   }
 }

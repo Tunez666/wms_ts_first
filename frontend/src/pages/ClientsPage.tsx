@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api } from '../api/client';
 import ClientForm from '../components/clients/ClientForm';
+import { toast } from 'react-hot-toast';
 
 interface Client {
     id: string;
@@ -48,14 +49,33 @@ export default function ClientsPage() {
         } catch (error) {
             console.error(error);
             setError('Не удалось загрузить список клиентов');
+            toast.error('Не удалось загрузить список клиентов');
         } finally {
             setLoading(false);
         }
     }
 
     async function createClient(data: ClientFormData) {
-        await api.post('/clients', data);
-        await loadClients();
+        try {
+            await api.post('/clients', data);
+            await loadClients();
+
+            toast.success('Клиент создан');
+        } catch (error: any) {
+            console.error(error);
+
+            const message = error?.response?.data?.message;
+
+            if (Array.isArray(message)) {
+                toast.error(message.join(', '));
+            } else if (message) {
+                toast.error(message);
+            } else {
+                toast.error('Не удалось создать клиента');
+            }
+
+            throw error;
+        }
     }
 
     async function updateClient(data: ClientFormData) {
@@ -63,12 +83,30 @@ export default function ClientsPage() {
             return;
         }
 
-        await api.patch(
-            `/clients/${editingClient.id}`,
-            data,
-        );
+        try {
+            await api.patch(
+                `/clients/${editingClient.id}`,
+                data,
+            );
 
-        await loadClients();
+            await loadClients();
+
+            toast.success('Клиент обновлён');
+        } catch (error: any) {
+            console.error(error);
+
+            const message = error?.response?.data?.message;
+
+            if (Array.isArray(message)) {
+                toast.error(message.join(', '));
+            } else if (message) {
+                toast.error(message);
+            } else {
+                toast.error('Не удалось обновить клиента');
+            }
+
+            throw error;
+        }
     }
 
     const filteredClients = clients.filter((client) => {
