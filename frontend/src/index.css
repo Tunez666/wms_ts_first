@@ -207,32 +207,268 @@ button {
 }
 
 /* =========================
-   Dashboard
+   Dashboard — extended
    ========================= */
 
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.stat-card {
+.dashboard-section {
+  margin-top: 24px;
   padding: 20px;
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
 }
 
-.stat-card span {
+.dashboard-section-header {
+  margin-bottom: 18px;
+}
+
+.dashboard-section-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* =========================
+   Dashboard stats
+   ========================= */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  min-width: 0;
+  padding: 20px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.stat-card:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 4px 12px rgba(17, 24, 39, 0.04);
+}
+
+.stat-card > span {
   display: block;
   color: #6b7280;
   font-size: 14px;
 }
 
-.stat-card strong {
+.stat-card > strong {
   display: block;
   margin-top: 8px;
+  color: #111827;
   font-size: 28px;
+  line-height: 1.2;
+}
+
+.stat-card > small {
+  display: block;
+  margin-top: 6px;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+/* Operations */
+
+.operations-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.operation-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 46px;
+  padding: 0 4px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.operation-row:last-child {
+  border-bottom: 0;
+}
+
+.operation-row span {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.operation-row strong {
+  min-width: 32px;
+  text-align: right;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Bottom section */
+
+.dashboard-bottom-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+/* Recent events */
+
+.dashboard-events {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-event {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 4px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.dashboard-event:last-child {
+  border-bottom: 0;
+}
+
+.dashboard-event-time {
+  flex-shrink: 0;
+  width: 48px;
+  color: #9ca3af;
+  font-size: 12px;
+  padding-top: 2px;
+}
+
+.dashboard-event-content {
+  min-width: 0;
+}
+
+.dashboard-event-description {
+  margin: 0;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.dashboard-event-user {
+  margin-top: 3px;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+/* Quick actions */
+
+.dashboard-quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dashboard-quick-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  background: white;
+  color: #374151;
+  font-size: 14px;
+  text-align: left;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.dashboard-quick-action:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.dashboard-quick-action-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Stat cards */
+
+.dashboard-grid .stat-card {
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.dashboard-grid .stat-card:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 4px 12px rgba(17, 24, 39, 0.04);
+}
+
+.stat-card strong + span {
+  margin-top: 4px;
+}
+
+.stat-card small {
+  display: block;
+  margin-top: 4px;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.dashboard-empty {
+  padding: 28px 4px 8px;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .app-content {
+    padding: 20px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .clients-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .clients-toolbar input {
+    width: 100%;
+  }
 }
 
 /* =========================
