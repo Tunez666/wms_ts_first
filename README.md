@@ -35,7 +35,7 @@ Requirements: Docker Engine and Docker Compose.
    cp .env.example .env
    ```
 
-3. Replace `JWT_SECRET` with a long, random value. The database and Redis hostnames in the example match the Compose service names.
+3. Set local PostgreSQL credentials and the matching password in `DATABASE_URL`. Replace `JWT_SECRET` with a long, random value.
 4. Start the application:
 
    ```bash
@@ -53,9 +53,9 @@ Stop the services with `docker compose down`. Add `-v` only if you also want to 
 
 | Variable | Purpose |
 |---|---|
+| `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD` | PostgreSQL container configuration |
 | `DATABASE_URL` | PostgreSQL connection string |
-| `REDIS_HOST` | Redis service hostname |
-| `REDIS_PORT` | Redis service port |
+| `REDIS_HOST`, `REDIS_PORT` | Redis connection settings |
 | `PORT` | Backend HTTP port |
 | `JWT_SECRET` | Secret used to sign JWTs |
 
